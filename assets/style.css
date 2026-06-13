@@ -1,0 +1,241 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0d1117;
+  --green: #00ff88;
+  --white: #e6edf3;
+  --gray: #8b949e;
+  --yellow: #ffa657;
+  --cyan: #79c0ff;
+  --red: #ff7b72;
+  --title-bar-bg: #161b22;
+  --border: #30363d;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#terminal-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 960px;
+  margin: 0 auto;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+#title-bar {
+  display: flex;
+  align-items: center;
+  background: var(--title-bar-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.btn {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.btn-close   { background: #ff5f57; }
+.btn-minimize { background: #febc2e; }
+.btn-maximize { background: #28c840; }
+
+.title-text {
+  flex: 1;
+  text-align: center;
+  color: var(--gray);
+  font-size: 12px;
+}
+
+#terminal {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+#output {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#output .line {
+  display: block;
+  min-height: 1.6em;
+}
+
+#output .prompt-line {
+  color: var(--green);
+}
+
+#output .comment {
+  color: var(--gray);
+}
+
+#output .error {
+  color: var(--red);
+}
+
+#output .cmd-name {
+  color: var(--cyan);
+}
+
+#output .highlight {
+  color: var(--green);
+  font-weight: bold;
+}
+
+#output .warning {
+  color: var(--yellow);
+}
+
+#output .success {
+  color: var(--green);
+}
+
+#output a {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+#output a:hover {
+  text-decoration: underline;
+}
+
+#output .project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+  margin: 4px 0;
+}
+
+#output .project-item {
+  color: var(--cyan);
+}
+
+#output .project-item .desc {
+  color: var(--gray);
+  font-size: 12px;
+}
+
+#output .section-title {
+  color: var(--green);
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#output .label {
+  color: var(--gray);
+}
+
+#output .value {
+  color: var(--white);
+}
+
+#output .banner {
+  color: var(--green);
+  font-weight: bold;
+}
+
+#input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.prompt {
+  color: var(--green);
+  white-space: nowrap;
+  margin-right: 2px;
+}
+
+#cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: var(--green);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+#cmd-input::selection {
+  background: var(--green);
+  color: var(--bg);
+}
+
+::selection {
+  background: var(--green);
+  color: var(--bg);
+}
+
+/* Scrollbar */
+#terminal::-webkit-scrollbar {
+  width: 6px;
+}
+
+#terminal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#terminal::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+#terminal::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.line {
+  animation: fadeIn 0.1s ease-out;
+}
+
+@media (max-width: 600px) {
+  #output .project-grid {
+    grid-template-columns: 1fr;
+  }
+  body {
+    font-size: 12px;
+  }
+  #terminal {
+    padding: 12px 14px;
+  }
+}
